@@ -42,11 +42,6 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
     }
   });
 
-  events_processed.push(bot.replyMessage(event.replyToken, {
-    type: "text",
-    text: "これはこれは"
-  }));
-
   // すべてのイベント処理が終了したら何個のイベントが処理されたか出力。
   Promise.all(events_processed).then(
       (response) => {
