@@ -39,6 +39,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
       }else if (event.message.text.includes('お腹空いた')){
         // ぐるナビURL設定
         const url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${process.env.GURUNAVI_ID}&name=cafe`
+        console.log(url)
         const res = await fetch(url)
         resultText = res
       }else{
