@@ -2,6 +2,7 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk");
+const fetch = require("node-fetch")
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -28,15 +29,18 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   let events_processed = [];
 
   // イベントオブジェクトを順次処理。
-  req.body.events.forEach((event) => {
+  req.body.events.forEach( async (event) => {
     // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
     if (event.type == "message" && event.message.type == "text"){
       let resultText = ''
 
       if (event.message.text == 'こんにちは'){
         resultText = 'こんにちは'
-      }else if (event.message.text.includes('天気')){
-        resultText = '天気'
+      }else if (event.message.text.includes('お腹空いた')){
+        // ぐるナビURL設定
+        const url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${process.env.GURUNAVI_ID}&name=中華`
+        const res = fetch(url)
+        resultText = res
       }else{
         resultText = ''
       }

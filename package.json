@@ -19,6 +19,7 @@
   "homepage": "https://github.com/cha1ra/my-first-linebot-api#readme",
   "dependencies": {
     "@line/bot-sdk": "^6.8.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0"
   }
 }
