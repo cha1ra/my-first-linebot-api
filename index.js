@@ -31,14 +31,33 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   req.body.events.forEach((event) => {
     // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
     if (event.type == "message" && event.message.type == "text"){
-      // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
-      if (event.message.text == "こんにちは"){
+      let resultText = ''
+
+      if (event.message.text == 'こんにちは'){
+        resultText = 'こんにちは'
+      }else if (event.message.text.includes('天気')){
+        resultText = '天気'
+      }else{
+        resultText = ''
+      }
+
+      if (resultText !== '') {
         // replyMessage()で返信し、そのプロミスをevents_processedに追加。
         events_processed.push(bot.replyMessage(event.replyToken, {
           type: "text",
-          text: "これはこれは"
+          text: resultText
         }));
       }
+
+
+      // // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
+      // if (event.message.text == "こんにちは"){
+      //   // replyMessage()で返信し、そのプロミスをevents_processedに追加。
+      //   events_processed.push(bot.replyMessage(event.replyToken, {
+      //     type: "text",
+      //     text: "ご丁寧にありがとうございます"
+      //   }));
+      // }
     }
   });
 
