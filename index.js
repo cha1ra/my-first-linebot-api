@@ -43,8 +43,8 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
         try {
           const res = await fetch(url,{method: 'GET'})
           console.log('レスもらったよー')
-          console.log(res)
-          resultText = res
+          console.log(res.json())
+          resultText = res.json()
         }catch(error){
           console.log(error)
         }
