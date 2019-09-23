@@ -40,9 +40,14 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
         // ぐるナビURL設定
         const url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${process.env.GURUNAVI_ID}&name=cafe`
         console.log(url)
-        const res = await fetch(url,{method: 'GET'})
-        console.log(res)
-        resultText = res
+        try {
+          const res = await fetch(url,{method: 'GET'})
+          console.log('レスもらったよー')
+          console.log(res)
+          resultText = res
+        }catch(error){
+          console.log(error)
+        }
       }else{
         resultText = ''
       }
