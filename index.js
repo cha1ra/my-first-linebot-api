@@ -31,6 +31,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   // イベントオブジェクトを順次処理。
   req.body.events.forEach((event) => {
     // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
+    console.log(event.type)
     if (event.type == "message" && event.message.type == "text"){
       let resultText = ''
 
@@ -42,7 +43,9 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
         console.log(url)
         fetch(url,{method: 'GET'})
           .then(res => res.json())
-          .then(response => console.log('Success:', JSON.stringify(response)))
+          .then(response => {
+            console.log('Success:', JSON.stringify(response))
+          })
           .catch(error => console.error('Error:', error));
       }else{
         resultText = ''
