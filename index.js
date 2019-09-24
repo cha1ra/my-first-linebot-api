@@ -6,7 +6,7 @@ const fetch = require('node-fetch')
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
-const line_config = {
+const LineConfig = {
   channelAccessToken: process.env.LINE_ACCESS_TOKEN, // 環境変数からアクセストークンをセットしています
   channelSecret: process.env.LINE_CHANNEL_SECRET // 環境変数からChannel Secretをセットしています
 }
@@ -16,11 +16,11 @@ const line_config = {
 server.listen(process.env.PORT || 3000)
 
 // APIコールのためのクライアントインスタンスを作成
-const bot = new line.Client(line_config)
+const bot = new line.Client(LineConfig)
 
 // -----------------------------------------------------------------------------
 // ルーター設定
-server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
+server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
   // 先行してLINE側にステータスコード200でレスポンスする。
   res.sendStatus(200)
 
