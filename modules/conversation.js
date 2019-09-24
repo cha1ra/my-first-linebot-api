@@ -32,5 +32,9 @@ function generateRandomNum (num) {
   return Math.floor(Math.random() * num)
 }
 
+const replyQA = (message) => {
+
+}
+
 // Module Export
-module.exports.replyMessage = replyMessage
+module.exports = { replyMessage, replyQA }

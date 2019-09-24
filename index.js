@@ -3,6 +3,7 @@
 const server = require('express')()
 const line = require('@line/bot-sdk')
 const conv = require('./modules/conversation')
+const messages = require('./modules/message')
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -18,6 +19,9 @@ server.listen(process.env.PORT || 3000)
 // APIコールのためのクライアントインスタンスを作成
 const bot = new line.Client(LineConfig)
 
+// QA判断用のフラグ
+const isQA = false
+
 // -----------------------------------------------------------------------------
 // ルーター設定
 server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
@@ -30,8 +34,11 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
   // イベントオブジェクトを順次処理。
   (async () => {
     for (const event of req.body.events) {
-      console.log(event.type)
-      if (event.type === 'message' && event.message.type === 'text') {
+      if (event.message.text === 'お問い合わせ') {
+        eventsProcessed.push(bot.replyMessage(event.replyToken, messages.faq))
+      } else if (isQA) {
+
+      } else if (event.type === 'message' && event.message.type === 'text') {
         const resultText = await conv.replyMessage(event.message.text)
         if (resultText !== '') {
           // replyMessage()で返信し、そのプロミスをevents_processedに追加。
