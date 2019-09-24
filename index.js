@@ -29,7 +29,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   let events_processed = [];
 
   // イベントオブジェクトを順次処理。
-  req.body.events.forEach( async (event) => {
+  req.body.events.forEach((event) => {
     // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
     if (event.type == "message" && event.message.type == "text"){
       let resultText = ''
@@ -40,14 +40,10 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
         // ぐるナビURL設定
         const url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${process.env.GURUNAVI_ID}&name=cafe`
         console.log(url)
-        try {
-          const res = await fetch(url,{method: 'GET'})
-          console.log('レスもらったよー')
-          console.log(res.json())
-          resultText = res.json()
-        }catch(error){
-          console.log(error)
-        }
+        fetch(url,{method: 'GET'})
+          .then(res => res.json())
+          .then(response => console.log('Success:', JSON.stringify(response)))
+          .catch(error => console.error('Error:', error));
       }else{
         resultText = ''
       }
