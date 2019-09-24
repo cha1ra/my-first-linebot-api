@@ -25,7 +25,7 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
   res.sendStatus(200)
 
   // すべてのイベント処理のプロミスを格納する配列。
-  const eventsProcessed = []
+  const eventsProcessed = [];
 
   // イベントオブジェクトを順次処理。
   (async () => {
