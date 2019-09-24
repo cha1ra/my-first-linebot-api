@@ -53,6 +53,7 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
       }
 
       if (resultText !== '') {
+        resultText = conv.replyMessage('test')
         // replyMessage()で返信し、そのプロミスをevents_processedに追加。
         eventsProcessed.push(bot.replyMessage(event.replyToken, {
           type: 'text',
