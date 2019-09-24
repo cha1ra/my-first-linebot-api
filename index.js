@@ -28,7 +28,6 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
   const eventsProcessed = []
 
   // イベントオブジェクトを順次処理。
-
   req.body.events.forEach((event) => {
     // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
     console.log(event.type)

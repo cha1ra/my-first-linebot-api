@@ -1,6 +1,8 @@
+// https://stackoverflow.com/questions/46715484/correct-async-function-export-in-node-js
+
 const fetch = require('node-fetch')
 
-module.exports.replyMessage = (message) => {
+const replyMessage = async (message) => {
   let reply
   if (message === 'こんにちは') {
     reply = 'ヤッホー！'
@@ -19,3 +21,5 @@ module.exports.replyMessage = (message) => {
   }
   return reply
 }
+
+module.exports.replyMessage = replyMessage
