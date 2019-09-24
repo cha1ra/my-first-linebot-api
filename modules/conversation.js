@@ -10,12 +10,20 @@ const replyMessage = async (message) => {
     // ぐるナビURL設定
     const url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${process.env.GURUNAVI_ID}&name=cafe`
     console.log(url)
-    fetch(url, { method: 'GET' })
-      .then(res => res.json())
-      .then(response => {
-        console.log('Success:', JSON.stringify(response))
-      })
-      .catch(error => console.error('Error:', error))
+    try {
+      const res = await fetch(url, { method: 'GET' })
+      const json = await res.json()
+      console.log(JSON.stringify(json))
+    } catch (e) {
+      console.error('Error:', e)
+    }
+
+    // fetch(url, { method: 'GET' })
+    //   .then(res => res.json())
+    //   .then(response => {
+    //     console.log('Success:', JSON.stringify(response))
+    //   })
+    //   .catch(error => console.error('Error:', error))
   } else {
     reply = ''
   }
