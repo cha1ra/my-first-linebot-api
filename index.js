@@ -3,6 +3,7 @@
 const server = require('express')()
 const line = require('@line/bot-sdk')
 const fetch = require('node-fetch')
+const conv = require('./modules/conversation')
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -36,7 +37,7 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
       let resultText = ''
 
       if (event.message.text === 'こんにちは') {
-        resultText = 'こんにちは'
+        resultText = conv
       } else if (event.message.text.includes('お腹空いた')) {
         // ぐるナビURL設定
         const url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${process.env.GURUNAVI_ID}&name=cafe`
