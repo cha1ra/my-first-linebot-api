@@ -12,7 +12,7 @@ const replyMessage = async (message) => {
     reply = `今日の運勢は...${fortunes[generateRandomNum(fortunes.length)]}です〜`
   } else if (message.includes('食べたい')) {
     // ぐるナビURL設定
-    const url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${process.env.GURUNAVI_ID}&name=${message.split('食べたい')[0]}`
+    const url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${process.env.GURUNAVI_ID}&name=${encodeURI(message.split('食')[0])}`
     console.log(url)
     try {
       const res = await fetch(url, { method: 'GET' })
