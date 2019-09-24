@@ -14,7 +14,7 @@ const replyMessage = async (message) => {
       const res = await fetch(url, { method: 'GET' })
       const json = await res.json()
       const response = JSON.stringify(json)
-      console.log(json)
+      console.log(json.rest)
       reply = `${response.rest[0].name}なんかはいかがですか？美味しいですよ♪\n${response.rest[0].url}`
     } catch (e) {
       console.error('Error:', e)
