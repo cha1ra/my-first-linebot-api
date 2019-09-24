@@ -34,7 +34,8 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
     console.log(event.type)
     if (event.type === 'message' && event.message.type === 'text') {
       const resultText = conv.replyMessage(event.message.text)
-
+      console.log('ここまできてる？')
+      console.log(resultText)
       if (resultText !== '') {
         // replyMessage()で返信し、そのプロミスをevents_processedに追加。
         eventsProcessed.push(bot.replyMessage(event.replyToken, {
@@ -42,15 +43,6 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
           text: resultText
         }))
       }
-
-      // // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
-      // if (event.message.text == "こんにちは"){
-      //   // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-      //   events_processed.push(bot.replyMessage(event.replyToken, {
-      //     type: "text",
-      //     text: "ご丁寧にありがとうございます"
-      //   }));
-      // }
     }
   })
 
