@@ -14,17 +14,11 @@ const replyMessage = async (message) => {
       const res = await fetch(url, { method: 'GET' })
       const json = await res.json()
       const response = JSON.stringify(json)
+      console.log(json)
       reply = `${response.rest[0].name}なんかはいかがですか？美味しいですよ♪\n${response.rest[0].url}`
     } catch (e) {
       console.error('Error:', e)
     }
-
-    // fetch(url, { method: 'GET' })
-    //   .then(res => res.json())
-    //   .then(response => {
-    //     console.log('Success:', JSON.stringify(response))
-    //   })
-    //   .catch(error => console.error('Error:', error))
   } else {
     reply = ''
   }
