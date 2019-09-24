@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 
-module.exports.replyMessage = async (message) => {
+module.exports.replyMessage = (message) => {
   let reply
   if (message === 'こんにちは') {
     reply = 'ヤッホー！'
