@@ -28,21 +28,23 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
   const eventsProcessed = []
 
   // イベントオブジェクトを順次処理。
-  for (const event of req.body.events) {
-    console.log(event.type)
-    if (event.type === 'message' && event.message.type === 'text') {
-      const resultText = conv.replyMessage(event.message.text)
-      console.log('ここまできてる？')
-      console.log(resultText)
-      if (resultText !== '') {
-        // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-        eventsProcessed.push(bot.replyMessage(event.replyToken, {
-          type: 'text',
-          text: resultText
-        }))
+  (async () => {
+    for (const event of req.body.events) {
+      console.log(event.type)
+      if (event.type === 'message' && event.message.type === 'text') {
+        const resultText = await conv.replyMessage(event.message.text)
+        console.log('ここまできてる？')
+        console.log(resultText)
+        if (resultText !== '') {
+          // replyMessage()で返信し、そのプロミスをevents_processedに追加。
+          eventsProcessed.push(bot.replyMessage(event.replyToken, {
+            type: 'text',
+            text: resultText
+          }))
+        }
       }
     }
-  }
+  })()
 
   // req.body.events.forEach((event) => {
   //   // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
