@@ -5,10 +5,11 @@ const fetch = require('node-fetch')
 const replyMessage = async (message) => {
   let reply = ''
   if (message === 'こんにちは') {
-    reply = 'ヤッホー！'
+    const types = ['ヤッホー！', 'ご丁寧にありがとうございます', '今日もいい天気ですね〜', '暇なんですか？']
+    reply = types[generateRandomNum(types.length)]
   } else if (message.includes('運勢')) {
-    const fortune = ['大吉', '中吉', '吉', '凶']
-    reply = `今日の運勢は...${fortune[Math.floor(Math.random() * 4)]}です〜`
+    const fortunes = ['大吉', '中吉', '吉', '凶']
+    reply = `今日の運勢は...${fortunes[generateRandomNum(fortunes.length)]}です〜`
   } else if (message.includes('食べたい')) {
     // ぐるナビURL設定
     const url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${process.env.GURUNAVI_ID}&name=cafe`
@@ -25,6 +26,10 @@ const replyMessage = async (message) => {
     reply = ''
   }
   return reply
+}
+
+function generateRandomNum (num) {
+  return Math.floor(Math.random() * num)
 }
 
 // Module Export
