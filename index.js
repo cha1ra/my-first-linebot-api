@@ -25,7 +25,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   res.sendStatus(200)
 
   // すべてのイベント処理のプロミスを格納する配列。
-  const events_processed = []
+  const eventsProcessed = []
 
   // イベントオブジェクトを順次処理。
 
@@ -53,7 +53,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
 
       if (resultText !== '') {
         // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-        events_processed.push(bot.replyMessage(event.replyToken, {
+        eventsProcessed.push(bot.replyMessage(event.replyToken, {
           type: 'text',
           text: resultText
         }))
@@ -71,7 +71,7 @@ server.post('/bot/webhook', line.middleware(line_config), (req, res, next) => {
   })
 
   // すべてのイベント処理が終了したら何個のイベントが処理されたか出力。
-  Promise.all(events_processed).then(
+  Promise.all(eventsProcessed).then(
     (response) => {
       console.log(`${response.length} event(s) processed.`)
     }
