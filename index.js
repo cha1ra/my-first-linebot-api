@@ -2,7 +2,6 @@
 // モジュールのインポート
 const server = require('express')()
 const line = require('@line/bot-sdk')
-const fetch = require('node-fetch')
 const conv = require('./modules/conversation')
 
 // -----------------------------------------------------------------------------
@@ -34,26 +33,9 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
     // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
     console.log(event.type)
     if (event.type === 'message' && event.message.type === 'text') {
-      let resultText = ''
-
-      if (event.message.text === 'こんにちは') {
-        resultText = conv.name
-      } else if (event.message.text.includes('お腹空いた')) {
-        // ぐるナビURL設定
-        const url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${process.env.GURUNAVI_ID}&name=cafe`
-        console.log(url)
-        fetch(url, { method: 'GET' })
-          .then(res => res.json())
-          .then(response => {
-            console.log('Success:', JSON.stringify(response))
-          })
-          .catch(error => console.error('Error:', error))
-      } else {
-        resultText = ''
-      }
+      const resultText = conv.replyMessage(event.message.text)
 
       if (resultText !== '') {
-        resultText = conv.replyMessage('test')
         // replyMessage()で返信し、そのプロミスをevents_processedに追加。
         eventsProcessed.push(bot.replyMessage(event.replyToken, {
           type: 'text',
