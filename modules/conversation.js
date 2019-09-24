@@ -4,7 +4,7 @@ const fetch = require('node-fetch')
 
 const replyMessage = async (message) => {
   let reply = ''
-  if (message === 'こんにちは') {
+  if (message.includes('こんにちは')) {
     const types = ['ヤッホー！', 'ご丁寧にありがとうございます', '今日もいい天気ですね〜', '暇なんですか？']
     reply = types[generateRandomNum(types.length)]
   } else if (message.includes('運勢')) {
@@ -12,7 +12,7 @@ const replyMessage = async (message) => {
     reply = `今日の運勢は...${fortunes[generateRandomNum(fortunes.length)]}です〜`
   } else if (message.includes('食べたい')) {
     // ぐるナビURL設定
-    const url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${process.env.GURUNAVI_ID}&name=cafe`
+    const url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${process.env.GURUNAVI_ID}&name=${message.split('食べたい')[0]}`
     console.log(url)
     try {
       const res = await fetch(url, { method: 'GET' })
