@@ -6,7 +6,10 @@ const replyMessage = async (message) => {
   let reply = ''
   if (message === 'こんにちは') {
     reply = 'ヤッホー！'
-  } else if (message.includes('お腹空いた')) {
+  } else if (message.includes('運勢')) {
+    const fortune = ['大吉', '中吉', '吉', '凶']
+    reply = `今日の運勢は...${fortune[Math.floor(Math.random() * 4)]}です〜`
+  } else if (message.includes('食べたい')) {
     // ぐるナビURL設定
     const url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${process.env.GURUNAVI_ID}&name=cafe`
     console.log(url)
