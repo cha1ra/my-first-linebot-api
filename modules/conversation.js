@@ -3,7 +3,7 @@
 const fetch = require('node-fetch')
 
 const replyMessage = async (message) => {
-  let reply
+  let reply = ''
   if (message === 'こんにちは') {
     reply = 'ヤッホー！'
   } else if (message.includes('お腹空いた')) {
@@ -13,7 +13,8 @@ const replyMessage = async (message) => {
     try {
       const res = await fetch(url, { method: 'GET' })
       const json = await res.json()
-      console.log(JSON.stringify(json))
+      const response = JSON.stringify(json)
+      reply = `${response.rest[0].name}なんかはいかがですか？美味しいですよ♪\n${response.rest[0].url}`
     } catch (e) {
       console.error('Error:', e)
     }
