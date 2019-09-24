@@ -59,7 +59,7 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
   //       }))
   //     }
   //   }
-  })
+  // })
 
   // すべてのイベント処理が終了したら何個のイベントが処理されたか出力。
   Promise.all(eventsProcessed).then(
