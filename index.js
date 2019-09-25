@@ -19,9 +19,6 @@ server.listen(process.env.PORT || 3000)
 // APIコールのためのクライアントインスタンスを作成
 const bot = new line.Client(LineConfig)
 
-// QA判断用のフラグ
-let isQA = false
-
 // -----------------------------------------------------------------------------
 // ルーター設定
 server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
@@ -40,9 +37,6 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
         //   text: 'お問い合わせいただきありがとうございます♪\n知りたいことをクリックしてください♪'
         // }))
         eventsProcessed.push(bot.replyMessage(event.replyToken, messages.faq))
-        isQA = true
-      } else if (isQA) {
-        isQA = false
       } else if (event.type === 'message' && event.message.type === 'text') {
         const result = await conv.exportReplyMessageObject(event.message.text)
         if (result !== '') {
