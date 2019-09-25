@@ -32,7 +32,7 @@ module.exports = {
   },
   serviceTypes: {
     type: 'template',
-    altText: 'this is a carousel template',
+    altText: '種類を選択して下さい',
     template: {
       type: 'carousel',
       actions: [],
