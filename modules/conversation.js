@@ -28,7 +28,7 @@ const exportReplyMessageObject = async (msg) => {
   } else if (msg === '商品に不具合があった') {
     reply = generateTextTemplate('大変申し訳ありません。手数をおかけいたしますが、不具合対象商品と不具合の内容を記載して送信いただけると幸いです。')
   } else if (msg === 'サービスの種類を知りたい') {
-    reply = generateTextTemplate('準備中です〜〜')
+    reply = messages.serviceTypes
   } else {
     reply = generateTextTemplate('ごめん、わからない！！')
   }
