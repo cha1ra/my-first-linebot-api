@@ -40,7 +40,7 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
       } else if (isQA) {
         isQA = false
       } else if (event.type === 'message' && event.message.type === 'text') {
-        const resultText = await conv.replyMessage(event.message.text)
+        const resultText = await conv.exportReplyMessageObject(event.message.text)
         if (resultText !== '') {
           // replyMessage()で返信し、そのプロミスをevents_processedに追加。
           eventsProcessed.push(bot.replyMessage(event.replyToken, {
