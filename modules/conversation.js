@@ -30,6 +30,8 @@ const exportReplyMessageObject = async (msg) => {
   } else if (msg === 'サービスの種類を知りたい') {
     // reply = messages.serviceTypes
     reply = messages.faq
+    console.log('ミーせて')
+    console.log(reply)
   } else if (msg === 'その他(メッセージ送信)') {
     reply = generateTextTemplate('こちらにメッセージを記入してください！')
   } else {
