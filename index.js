@@ -3,7 +3,7 @@
 const server = require('express')()
 const line = require('@line/bot-sdk')
 const conv = require('./modules/conversation')
-const messages = require('./modules/message')
+const messages = require('./modules/messages')
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -20,7 +20,7 @@ server.listen(process.env.PORT || 3000)
 const bot = new line.Client(LineConfig)
 
 // QA判断用のフラグ
-const isQA = false
+let isQA = false
 
 // -----------------------------------------------------------------------------
 // ルーター設定
@@ -36,8 +36,9 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
     for (const event of req.body.events) {
       if (event.message.text === 'お問い合わせ') {
         eventsProcessed.push(bot.replyMessage(event.replyToken, messages.faq))
+        isQA = true
       } else if (isQA) {
-
+        isQA = false
       } else if (event.type === 'message' && event.message.type === 'text') {
         const resultText = await conv.replyMessage(event.message.text)
         if (resultText !== '') {
