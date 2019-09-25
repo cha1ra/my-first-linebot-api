@@ -38,7 +38,7 @@ module.exports = {
       actions: [],
       columns: [
         {
-          thumbnailImageUrl: 'http://aira0113.sakura.ne.jp/proglearn-docs/img/f-3.png',
+          thumbnailImageUrl: 'https://blog.proglearn.com/wp-content/uploads/2019/09/f-3.png',
           title: '            Webページ作成',
           text: 'HTML, CSS, JS によるHP作成',
           actions: [
@@ -55,7 +55,7 @@ module.exports = {
           ]
         },
         {
-          thumbnailImageUrl: 'http://aira0113.sakura.ne.jp/proglearn-docs/img/f-4.png',
+          thumbnailImageUrl: 'https://blog.proglearn.com/wp-content/uploads/2019/09/f-4.png',
           title: '             行動計画表作成',
           text: '予算・KPIのシミュレーション',
           actions: [
@@ -72,7 +72,7 @@ module.exports = {
           ]
         },
         {
-          thumbnailImageUrl: 'http://aira0113.sakura.ne.jp/proglearn-docs/img/f-1.png',
+          thumbnailImageUrl: 'https://blog.proglearn.com/wp-content/uploads/2019/09/f-1.png',
           title: '            コンサルティング',
           text: '     コンサルティングを実施',
           actions: [
