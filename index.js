@@ -35,18 +35,19 @@ server.post('/bot/webhook', line.middleware(LineConfig), (req, res, next) => {
   (async () => {
     for (const event of req.body.events) {
       if (event.message.text === 'お問い合わせ') {
+        eventsProcessed.push(bot.replyMessage(event.replyToken, {
+          type: 'text',
+          text: 'お問い合わせいただきありがとうございます♪\n知りたいことをクリックしてください♪'
+        }))
         eventsProcessed.push(bot.replyMessage(event.replyToken, messages.faq))
         isQA = true
       } else if (isQA) {
         isQA = false
       } else if (event.type === 'message' && event.message.type === 'text') {
-        const resultText = await conv.exportReplyMessageObject(event.message.text)
-        if (resultText !== '') {
+        const result = await conv.exportReplyMessageObject(event.message.text)
+        if (result !== '') {
           // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-          eventsProcessed.push(bot.replyMessage(event.replyToken, {
-            type: 'text',
-            text: resultText
-          }))
+          eventsProcessed.push(bot.replyMessage(event.replyToken, result))
         }
       }
     }
